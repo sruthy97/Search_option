@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
+import District from './DistrictList.json';
+ const App=()=>{
+const [SearchTerm,setSearchTerm]=useState("");
+let i=0;
+return (
 
-function App() {
-  return (
-    <div className="App">
+  <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Kerala District</h1>
       </header>
-    </div>
-  );
+    
+ <div  className='content'>
+ <input className='no-outline'  type='text' placeholder='Search...'
+ onChange={(event)=>{setSearchTerm(event.target.value);}}></input>
+ { District.filter((val,key)=>{
+if(SearchTerm==""){
+
+  return val;
+}
+else if(val.name?.toLowerCase().includes(SearchTerm.toLocaleLowerCase())){
+  return val;
 }
 
+ }).map((val)=>{
+return(
+  <div >     
+  <ul className='nav'>
+      <li key={i++}>
+      
+      {val.name}
+      
+      </li></ul>  
+  </div>
+
+);
+}
+
+)
+}
+</div>
+
+</div>
+
+  );
+
+}
 export default App;
